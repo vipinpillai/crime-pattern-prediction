@@ -1,3 +1,7 @@
+# import theano
+# theano.config.device = 'gpu'
+# theano.config.floatX = 'float32'
+
 import numpy
 import pandas as pd
 from keras.models import Sequential
@@ -9,9 +13,7 @@ from sklearn.model_selection import KFold
 from sklearn.preprocessing import LabelEncoder
 from sklearn.pipeline import Pipeline
 
-import theano
-theano.config.device = 'gpu'
-theano.config.floatX = 'float32'
+
 
 seed = 7
 numpy.random.seed(seed)
