@@ -61,13 +61,16 @@ dummy_y = np_utils.to_categorical(encoded_Y)
 def baseline_model():
     # create model
     model = Sequential()
-    model.add(Dense(4, input_dim=7, init='normal', activation='relu'))
-    model.add(Dense(81, init='normal', activation='sigmoid'))
+    model.add(Dense(7, input_dim=7, init='uniform', activation='relu'))
+    model.add(Dense(7, input_dim=7, init='uniform', activation='relu'))
+    model.add(Dense(7, input_dim=7, init='uniform', activation='relu'))
+    #model.add(Dense(7, input_dim=7, init='normal', activation='relu'))
+    model.add(Dense(len(Y.unique()), init='normal', activation='sigmoid'))
     # Compile model
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
 
-estimator = KerasClassifier(build_fn=baseline_model, nb_epoch=1, batch_size=5, verbose=0)
+estimator = KerasClassifier(build_fn=baseline_model, nb_epoch=200, batch_size=5, verbose=1)
 kfold = KFold(n_splits=10, shuffle=True, random_state=seed)
-results = cross_val_score(estimator, X, dummy_y, cv=kfold)
+results = cross_val_score(estimator, X.values, dummy_y, cv=kfold)
 print("Baseline: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
