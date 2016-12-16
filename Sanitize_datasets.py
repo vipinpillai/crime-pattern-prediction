@@ -13,5 +13,6 @@ crime_dataframe['CrimeHour'] = crime_dataframe['CrimeTime'].apply(lambda time: t
 crime_dataframe = crime_dataframe.drop(196469)
 crime_dataframe['CrimeDay'] = crime_dataframe['CrimeDate'].apply(lambda date: pd.Timestamp(date).weekday_name)
 crime_dataframe['NormalizedCrimeDate'] = crime_dataframe['CrimeDate'].apply(lambda date: pd.Timestamp(date))
-
+crime_dataframe['Weapon'] = crime_dataframe['Weapon'].fillna('Unknown')
+crime_dataframe = crime_dataframe[crime_dataframe['Weapon'] != 'Unknown']
 crime_dataframe.to_csv('BPD_Crime_sanitized.csv', encoding = 'utf-8')
