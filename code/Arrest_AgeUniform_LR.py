@@ -44,15 +44,13 @@ score = log_regression.score(X_test,Y_test)
 print 'Score for Logistic Regression: ' + str(score*100) + '%'
 
 #Histogram
-'''
-print len(arrest_dataframe)
+
 A = arrest_dataframe['Age'].sort_values()
 print A.values
 
 plt.hist(A.values)
-plt.show()
 
-plt.title("Gaussian Histogram")
-plt.xlabel("Value")
+plt.title(" Histogram")
+plt.xlabel("Age Values")
 plt.ylabel("Frequency")
-'''
+plt.show()

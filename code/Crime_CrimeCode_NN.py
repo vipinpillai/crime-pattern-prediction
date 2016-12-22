@@ -61,17 +61,9 @@ def baseline_model(input_size, output_size):
     model.add(Activation('softmax'))
 
     # Compile model
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', 'fmeasure', 'precision', 'recall'])
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', 'precision', 'recall'])
     return model
 
-# estimator = KerasClassifier(build_fn=baseline_model, nb_epoch=15, batch_size=5, verbose=1)
-# seed = 7
-# numpy.random.seed(seed)
-# kfold = KFold(n_splits=10, shuffle=True, random_state=seed)
-# results = cross_val_score(estimator, X_train.values, dummy_y_train, cv=kfold)
-# print("Baseline: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
-
-print 'length: ' + str(len(X_train.columns))
 build_fn = baseline_model(len(X_train.columns), len(Y.unique()))
 build_fn.summary()
 build_fn.fit(X_train.values, dummy_y_train, batch_size =5, nb_epoch = 5, verbose=1, shuffle=True)

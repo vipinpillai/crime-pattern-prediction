@@ -12,6 +12,8 @@ from sklearn.pipeline import Pipeline
 from keras.layers.advanced_activations import LeakyReLU
 from keras.regularizers import l2
 from keras.layers import Dense, Activation
+import matplotlib.mlab as mlab
+import matplotlib.pyplot as plt
 
 # Read preprocessed dataset
 bpd_crime_dataframe = pd.read_csv('BPD_Crime_sanitized.csv')
@@ -28,10 +30,10 @@ X = pd.concat([pd.get_dummies(bpd_crime_dataframe['Premise'], prefix = 'P'), pd.
 Y = bpd_crime_dataframe['CrimeCode']
 print str(len(Y.unique()))
 
-X_train = X[:10000]
-Y_train = Y[:10000]
-X_test = X[10000:20000]
-Y_test = Y[10000:20000]
+X_train = X[:15000]
+Y_train = Y[:15000]
+X_test = X[15000:30000]
+Y_test = Y[15000:30000]
 
 print str(len(Y_train.unique()))
 print str(len(Y_test.unique()))
@@ -61,19 +63,28 @@ def baseline_model(input_size, output_size):
     model.add(Activation('softmax'))
 
     # Compile model
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', 'fmeasure', 'precision', 'recall'])
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', 'precision', 'recall'])
     return model
 
-# estimator = KerasClassifier(build_fn=baseline_model, nb_epoch=15, batch_size=5, verbose=1)
-# seed = 7
-# numpy.random.seed(seed)
-# kfold = KFold(n_splits=10, shuffle=True, random_state=seed)
-# results = cross_val_score(estimator, X_train.values, dummy_y_train, cv=kfold)
-# print("Baseline: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+accuracy = []
+precision = []
+recall = []
+total_iterations = 11
+for i in range(1,total_iterations):
+	build_fn = baseline_model(len(X_train.columns), len(Y.unique()))
+	build_fn.summary()
+	build_fn.fit(X_train.values, dummy_y_train, batch_size=5, nb_epoch=i, verbose=1, shuffle=True)
+	results = build_fn.evaluate(X_test.values, dummy_y_test, verbose=1)
+	print 'Results: ' + str(results)
+	accuracy.append(100*results[1])
+	precision.append(100*results[2])
+	recall.append(100*results[3])
 
-print 'length: ' + str(len(X_train.columns))
-build_fn = baseline_model(len(X_train.columns), len(Y.unique()))
-build_fn.summary()
-build_fn.fit(X_train.values, dummy_y_train, batch_size =5, nb_epoch = 5, verbose=1, shuffle=True)
-results = build_fn.evaluate(X_test.values, dummy_y_test, verbose=1)
-print 'Results: ' + str(results)
+plt.title("CrimeCode vs Epoch")
+plt.xlabel("Epoch")
+plt.ylabel("% value")
+
+plt.plot(range(1,total_iterations), accuracy, 'r-', range(1,total_iterations), precision, 'b-', range(1,total_iterations), recall, 'g-')
+plt.axis([0, 10, 0, 100])
+
+plt.show()
