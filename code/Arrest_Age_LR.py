@@ -13,7 +13,7 @@ arrest_dataframe = pd.read_csv('BPD_Arrests_sanitized.csv')
 #Shuffle
 arrest_dataframe =  arrest_dataframe.sample(frac=1).reset_index(drop=True)
 
-X = pd.concat([pd.get_dummies(arrest_dataframe['IncidentOffense'], prefix = 'offns'), pd.get_dummies(arrest_dataframe['NormalizedIncidentLocation'], prefix = 'incLoc'), pd.get_dummies(arrest_dataframe['Charge'], prefix = 'C'), pd.get_dummies(arrest_dataframe['Neighborhood'], prefix = 'N'), pd.get_dummies(arrest_dataframe['District'], prefix = 'D'), pd.get_dummies(arrest_dataframe['Post'], prefix = 'P'), pd.get_dummies(arrest_dataframe['Location 1'], prefix = 'L1')], axis = 1)
+X = pd.concat([pd.get_dummies(arrest_dataframe['IncidentOffense'], prefix = 'offns'), pd.get_dummies(arrest_dataframe['NormalizedIncidentLocation'], prefix = 'incLoc'), pd.get_dummies(arrest_dataframe['Charge'], prefix = 'C'), pd.get_dummies(arrest_dataframe['Neighborhood'], prefix = 'N'), pd.get_dummies(arrest_dataframe['District'], prefix = 'D')], axis = 1)
 Y = arrest_dataframe['Age']
 
 X_train = X.iloc[1:(len(X)/2)]

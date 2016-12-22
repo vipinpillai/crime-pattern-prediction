@@ -24,29 +24,23 @@ X = pd.concat([pd.get_dummies(bpd_crime_dataframe['Premise'], prefix = 'P'), pd.
 
 Y = bpd_crime_dataframe['CrimeDay']
 
-print str(len(Y.unique()))
-
 X_train = X[:10000]
 Y_train = Y[:10000]
 X_test = X[10000:20000]
 Y_test = Y[10000:20000]
 
-print str(len(Y_train.unique()))
-print str(len(Y_test.unique()))
-
 # Train model
 encoder = LabelEncoder()
+
 encoder.fit(Y_train)
 encoded_Y_train = encoder.transform(Y_train)
 # convert integers to dummy variables (i.e. one hot encoded)
 dummy_y_train = np_utils.to_categorical(encoded_Y_train)
-print str(dummy_y_train.shape)
 
 encoder.fit(Y_test)
 encoded_Y_test = encoder.transform(Y_test)
 # convert integers to dummy variables (i.e. one hot encoded)
 dummy_y_test = np_utils.to_categorical(encoded_Y_test)
-print str(dummy_y_test.shape)
 
 
 # define baseline model
@@ -59,19 +53,13 @@ def baseline_model(input_size, output_size):
     model.add(Activation('softmax'))
 
     # Compile model
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', 'fmeasure', 'precision', 'recall'])
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', 'precision', 'recall'])
     return model
 
-# estimator = KerasClassifier(build_fn=baseline_model, nb_epoch=15, batch_size=5, verbose=1)
-# seed = 7
-# numpy.random.seed(seed)
-# kfold = KFold(n_splits=10, shuffle=True, random_state=seed)
-# results = cross_val_score(estimator, X_train.values, dummy_y_train, cv=kfold)
-# print("Baseline: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
-
-print 'length: ' + str(len(X_train.columns))
 build_fn = baseline_model(len(X_train.columns), len(Y.unique()))
 build_fn.summary()
-build_fn.fit(X_train.values, dummy_y_train, batch_size =5, nb_epoch = 5, verbose=1, shuffle=True)
+build_fn.fit(X_train.values, dummy_y_train, batch_size=5, nb_epoch=5, verbose=1, shuffle=True)
 results = build_fn.evaluate(X_test.values, dummy_y_test, verbose=1)
 print 'Results: ' + str(results)
+
+# Output sequence in results: loss, accuracy, precision, recall
