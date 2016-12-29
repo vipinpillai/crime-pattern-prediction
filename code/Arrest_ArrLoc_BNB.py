@@ -1,3 +1,5 @@
+#Evaluation of the ArrestLocation feature from BPD Arrests Dataset using Bernoulli Naive Bayes
+
 import numpy as np
 import pandas as pd
 from sklearn.naive_bayes import BernoulliNB

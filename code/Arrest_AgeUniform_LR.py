@@ -1,3 +1,5 @@
+#Evaluation of the Age feature (Range values) from BPD Arrests Dataset using Logistic Regression 
+
 import numpy as np
 import pandas as pd
 
@@ -46,7 +48,6 @@ print 'Score for Logistic Regression: ' + str(score*100) + '%'
 #Histogram
 
 A = arrest_dataframe['Age'].sort_values()
-print A.values
 
 plt.hist(A.values)
 

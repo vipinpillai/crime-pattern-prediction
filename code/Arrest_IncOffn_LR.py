@@ -1,3 +1,5 @@
+#Evaluation of the IncidentOffense feature from BPD Arrests Dataset using Logistic Regression
+
 import numpy as np
 import pandas as pd
 

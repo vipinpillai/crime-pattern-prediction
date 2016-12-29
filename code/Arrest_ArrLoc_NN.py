@@ -1,3 +1,5 @@
+#Evaluation of the ArrestLocation feature from BPD Arrests Dataset using a Multi-layer Neural Network
+
 import numpy as np
 import pandas as pd
 from keras.models import Sequential
