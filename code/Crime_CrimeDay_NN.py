@@ -1,3 +1,4 @@
+#Evaluation of the CrimeDay feature from BPD Crime Dataset using a Multi-Layer Neural Network
 
 import numpy
 import pandas as pd
@@ -14,7 +15,7 @@ from keras.regularizers import l2
 from keras.layers import Dense, Activation
 
 # Read preprocessed dataset
-bpd_crime_dataframe = pd.read_csv('BPD_Crime_sanitized.csv')
+bpd_crime_dataframe = pd.read_csv('../dataset/BPD_Crime_sanitized.csv')
 
 # Shuffle
 bpd_crime_dataframe =  bpd_crime_dataframe.sample(frac=1).reset_index(drop=True)

@@ -1,3 +1,5 @@
+#Evaluation of the CrimeCode feature from BPD Crime Dataset using Bernoulli Naive Bayes
+
 from sklearn.naive_bayes import BernoulliNB
 import numpy
 import pandas as pd
@@ -5,7 +7,7 @@ import pandas as pd
 from sklearn import linear_model
 from sklearn.preprocessing import LabelEncoder
 
-bpd_crime_dataframe = pd.read_csv('BPD_Crime_sanitized.csv')
+bpd_crime_dataframe = pd.read_csv('../dataset/BPD_Crime_sanitized.csv')
 
 
 bpd_crime_dataframe = bpd_crime_dataframe.ix[~bpd_crime_dataframe.CrimeCode.isin(['8DO', '3LK', '6K', '8FV', '8CV', '3N', '8GV', '8EV', '3EO', '8I', '8CO', '8BV', '8GO', '3EK', '3LO', '3GO'])]

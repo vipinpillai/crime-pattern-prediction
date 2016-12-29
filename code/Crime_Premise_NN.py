@@ -1,3 +1,4 @@
+#Evaluation of the Premise feature from BPD Crime Dataset using a Multi-Layer Neural Network
 
 import numpy
 import pandas as pd
@@ -16,7 +17,7 @@ import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 
 # Read preprocessed dataset
-bpd_crime_dataframe = pd.read_csv('BPD_Crime_sanitized.csv')
+bpd_crime_dataframe = pd.read_csv('../dataset/BPD_Crime_sanitized.csv')
 
 
 # Remove low frequency premises

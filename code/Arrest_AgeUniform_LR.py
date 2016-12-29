@@ -10,7 +10,7 @@ from sklearn import linear_model
 from sklearn.preprocessing import LabelEncoder
 
 #Load preprocessed dataset
-arrest_dataframe = pd.read_csv('BPD_Arrests_sanitized.csv')
+arrest_dataframe = pd.read_csv('../dataset/BPD_Arrests_sanitized.csv')
 
 #Uniform age
 arrest_dataframe['Age'] = arrest_dataframe['Age'].apply(lambda age: 60 if (age >= 60) else age)

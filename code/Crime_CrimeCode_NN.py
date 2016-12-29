@@ -1,3 +1,4 @@
+#Evaluation of the CrimeCode feature from BPD Crime Dataset using a Multi-layer Neural Network
 
 import numpy
 import pandas as pd
@@ -14,7 +15,7 @@ from keras.regularizers import l2
 from keras.layers import Dense, Activation
 
 # Read preprocessed dataset
-bpd_crime_dataframe = pd.read_csv('BPD_Crime_sanitized.csv')
+bpd_crime_dataframe = pd.read_csv('../dataset/BPD_Crime_sanitized.csv')
 
 # Remove low frequency crime codes
 bpd_crime_dataframe = bpd_crime_dataframe.ix[~bpd_crime_dataframe.CrimeCode.isin(['8DO', '3LK', '6K', '8FV', '8CV', '3N', '8GV', '8EV', '3EO', '8I', '8CO', '8BV', '8GO', '3EK', '3LO', '3GO'])]

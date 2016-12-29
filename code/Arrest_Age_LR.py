@@ -10,7 +10,7 @@ from sklearn import linear_model
 from sklearn.preprocessing import LabelEncoder
 
 #Load preprocessed dataset
-arrest_dataframe = pd.read_csv('BPD_Arrests_sanitized.csv')
+arrest_dataframe = pd.read_csv('../dataset/BPD_Arrests_sanitized.csv')
 
 #Shuffle
 arrest_dataframe =  arrest_dataframe.sample(frac=1).reset_index(drop=True)

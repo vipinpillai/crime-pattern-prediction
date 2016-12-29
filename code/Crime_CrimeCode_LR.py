@@ -1,3 +1,5 @@
+#Evaluation of the CrimeCode feature from BPD Crime Dataset using Logistic Regression
+
 import numpy
 import pandas as pd
 # import matplotlib.pyplot as plt
@@ -5,7 +7,7 @@ from sklearn import linear_model
 from sklearn.preprocessing import LabelEncoder
 
 # Load preprocessed dataset
-bpd_crime_dataframe = pd.read_csv('BPD_Crime_sanitized.csv')
+bpd_crime_dataframe = pd.read_csv('../dataset/BPD_Crime_sanitized.csv')
 
 # Shuffle
 bpd_crime_dataframe =  bpd_crime_dataframe.sample(frac=1).reset_index(drop=True)

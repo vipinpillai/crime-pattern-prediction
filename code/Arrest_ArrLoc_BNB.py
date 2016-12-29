@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 
 # Load preprocessed dataset
-arrest_dataframe = pd.read_csv('BPD_Arrests_sanitized.csv')
+arrest_dataframe = pd.read_csv('../dataset/BPD_Arrests_sanitized.csv')
 
 # Remove low frequency records
 threshold = 10 # Anything that occurs less than this will be removed.
